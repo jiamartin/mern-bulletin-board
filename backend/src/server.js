@@ -6,6 +6,9 @@ import path from "path"
 import rateLimiter from "../middleware/ratelimiter.js";
 import notesRoutes from "./routes/notesRoutes.js";
 import { connectDB } from "../config/db.js";
+import dns from "node:dns";
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 dotenv.config();
 
@@ -18,7 +21,7 @@ connectDB();
 // middleware
 if(process.env.NODE_ENV !== "production"){
     app.use(cors({
-        origin: "http://localhoast:5173",
+        origin: "http://localhost:5173",
     }));
 }
 app.use(express.json()); // this middleware will parse JSON bodies: req.body
